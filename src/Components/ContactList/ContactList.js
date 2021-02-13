@@ -1,20 +1,22 @@
+import React from 'react';
 import './ContactList.scss';
 import PropTypes from 'prop-types';
+import IconButton from '../IconButton/IconButton';
+import { ReactComponent as DeleteIcon } from '../../icons/delete.svg';
+
 
 
 const ContactList = ({ contacts, onRemoveContact }) => (
     <div>
     <ul>
-            {contacts.map(({ id, name, number }) => (
+            {contacts.map(({id, name, number}, i) => (
             <li
                 key={id}
                 className="ContactItem">
-                   - {name}: {number}
-                <button
-                    type="button"
-                    onClick={() => onRemoveContact(id)}>
-                     Delete
-                 </button>
+                   {i+1}. {name}: {number}
+                    <IconButton onClick={() => onRemoveContact(id)} aria-label="Удалить контакт">
+                     <DeleteIcon width="17" height="17" fill="#fff" />
+                 </IconButton>
             </li>
         ))}
         </ul>

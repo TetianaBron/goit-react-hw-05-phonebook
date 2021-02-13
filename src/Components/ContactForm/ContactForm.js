@@ -35,6 +35,10 @@ export default class ContactForm extends Component {
             });
         }
     };
+
+    isValidPhone = (myPhone) => { 
+    return /^\+\d{2}\(\d{3}\)\d{3}-\d{2}-\d{2}$/.test(myPhone); 
+    } 
     
     render() {
         const { name, number } = this.state;
@@ -53,21 +57,25 @@ export default class ContactForm extends Component {
                     className="Input"
                     onChange={this.handleChange}
                     name="name"
+                    placeholder="John Smith"
                     />
             
                     <label
                         htmlFor="number"
                         className="Label">Number</label>
                 <input
-                    type="number"
+                    type="text"
                     value={number}
                     id="number"
                     className="Input"
                     onChange={this.handleChange}
                     name="number"
+                    placeholder="+38(067)777-77-77"
                     />
                     
-                    <button type="submit">
+                    <button
+                        type="submit"
+                        className="ContactFormButton">
                       Add contact
                     </button>
                  </form>

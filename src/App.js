@@ -6,16 +6,15 @@ import Filter from './Components/Filter/Filter';
 import ContactList from './Components/ContactList/ContactList';
 
 
+
 export default class App extends Component {
 
-    static propTypes = {
-    };
+    static propTypes = {};
 
     static defaultProps = {};
 
     state = {
-        contacts: [ 
-        ],
+        contacts: [],
         filter: ''
     };
 
@@ -77,11 +76,10 @@ export default class App extends Component {
         const visibleContacts = this.getVisibleContacts();
         return ( 
             <Layout>
-                <h1>Phonebook</h1>
+                <h1 className="Title">Phonebook</h1>
                 <ContactForm onAddContact={this.addContact} /> 
                 {contacts.length > 0 && (
              <>       
-                <h2>Contacts</h2>
                 {contacts.length > 1 && (
                     <Filter
                         value={filter}
@@ -89,7 +87,7 @@ export default class App extends Component {
                 )}
                     <ContactList
                         contacts={visibleContacts}
-                            onRemoveContact={this.removeContact} />
+                        onRemoveContact={this.removeContact} />
               </>
                 )} 
             </Layout>

@@ -1,32 +1,50 @@
+@import '../../styles/colors';
+
 .Form {
   display: flex;
   flex-direction: column;
-  outline: 1px solid black;
-  padding: 30px 105px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 10px 45px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+
+  @media screen and (min-width: 601px) {
+    padding: 20px 65px;
+  }
 }
 
 .Label {
   margin-bottom: 5px;
+
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+  }
 }
 
 .Input {
   margin-bottom: 30px;
-  outline: none;
   padding: 5px 15px;
+  outline: none;
+  border: 1px solid $black;
+  border-radius: 2px;
 
   &:focus,
   &:hover {
-    border: 2px solid rgb(131, 188, 202);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border: 1px solid $indigo;
+    outline: none;
   }
 }
 
-button {
+.ContactFormButton {
   cursor: pointer;
-  padding: 5px 15px;
+  padding: 8px 15px;
+  background-color: $indigo;
+  color: $white;
+  border: none;
+  border-radius: 2px;
 
   &:focus,
   &:hover {
-    background-color: rgb(217, 233, 238);
+    background-color: $indigo-accent;
   }
 }

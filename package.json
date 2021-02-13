@@ -1,12 +1,12 @@
 {
-  "name": "goit-react-hw-03-phonebook",
+  "name": "goit-react-hw-05-phonebook",
   "version": "0.1.0",
   "private": true,
   "author": {
     "name": "Tetiana Bronitska",
     "email": "tanya_nest@ukr.net"
   },
-  "homepage": "http://tetianabron.github.io/goit-react-hw-03-phonebook",
+  "homepage": "http://tetianabron.github.io/goit-react-hw-05-phonebook",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
