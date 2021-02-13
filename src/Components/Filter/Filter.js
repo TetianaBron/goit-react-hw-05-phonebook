@@ -1,4 +1,4 @@
-import './Filter.css';
+import './Filter.scss';
 import PropTypes from 'prop-types';
 
 const Filter = ({value, onChangeFilter}) => (

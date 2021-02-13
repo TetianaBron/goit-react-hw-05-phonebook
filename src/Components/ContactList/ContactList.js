@@ -1,4 +1,4 @@
-import './ContactList.css';
+import './ContactList.scss';
 import PropTypes from 'prop-types';
 
 
