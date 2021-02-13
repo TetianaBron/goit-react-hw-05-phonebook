@@ -1,0 +1,20 @@
+.FindForm {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0px 30px;
+}
+
+.FindLabel {
+  margin-bottom: 5px;
+}
+
+.FindInput {
+  outline: none;
+  padding: 5px 15px;
+}
+
+.FindInput:focus,
+.FindInput:hover {
+  border: 2px solid rgb(131, 188, 202);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+}
