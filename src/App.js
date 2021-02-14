@@ -4,6 +4,7 @@ import ContactForm from './Components/ContactForm/ContactForm';
 import Layout from './Components/Layout/Layout';
 import Filter from './Components/Filter/Filter';
 import ContactList from './Components/ContactList/ContactList';
+import { CSSTransition } from 'react-transition-group';
 
 
 
@@ -76,7 +77,16 @@ export default class App extends Component {
         const visibleContacts = this.getVisibleContacts();
         return ( 
             <Layout>
-                <h1 className="Title">Phonebook</h1>
+                <CSSTransition
+                    in={true}
+                    appear={true}
+                    timeout={500}
+                    classNames="Title-SlideIn"
+                    unmountOnExit
+                >
+                    <h1 className="Title">Phonebook</h1>
+                </CSSTransition>
+                
                 <ContactForm onAddContact={this.addContact} /> 
                 {contacts.length > 0 && (
              <>       

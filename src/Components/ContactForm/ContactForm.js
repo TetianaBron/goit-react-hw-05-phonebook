@@ -34,11 +34,7 @@ export default class ContactForm extends Component {
                 number: ''
             });
         }
-    };
-
-    isValidPhone = (myPhone) => { 
-    return /^\+\d{2}\(\d{3}\)\d{3}-\d{2}-\d{2}$/.test(myPhone); 
-    } 
+    }; 
     
     render() {
         const { name, number } = this.state;
@@ -64,7 +60,7 @@ export default class ContactForm extends Component {
                         htmlFor="number"
                         className="Label">Number</label>
                 <input
-                    type="text"
+                    type="tel"
                     value={number}
                     id="number"
                     className="Input"

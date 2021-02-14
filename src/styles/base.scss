@@ -1,6 +1,7 @@
 @import './colors';
 
 body {
+  background-color: rgb(248, 248, 248);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -20,4 +21,13 @@ ul {
 
 .Title {
   color: $indigo;
+}
+
+.Title-SlideIn-appear {
+  transform: translateX(-100%);
+}
+
+.Title-SlideIn-appear-active {
+  transform: translateX(0);
+  transition: transform 500ms linear;
 }
