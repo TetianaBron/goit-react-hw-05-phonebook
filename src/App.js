@@ -5,6 +5,7 @@ import Layout from './Components/Layout/Layout';
 import Filter from './Components/Filter/Filter';
 import ContactList from './Components/ContactList/ContactList';
 import { CSSTransition } from 'react-transition-group';
+import Notification from './Components/Notification/Notification';
 
 
 
@@ -16,7 +17,9 @@ export default class App extends Component {
 
     state = {
         contacts: [],
-        filter: ''
+        filter: '',
+        noticationContactExist: false,
+        noticationEnterData: false
     };
 
     addContact = (name, number) => {
@@ -26,8 +29,16 @@ export default class App extends Component {
        number
        };
 
-        if (this.state.contacts.find((item) => item.name.toLowerCase() === name.toLowerCase())) {
-            alert(`${name} is already in contacts.`);
+        if (name === '' || number === '') {
+              this.setState({ noticationEnterData: true });
+            setTimeout(() => {
+            this.setState({ noticationEnterData: false });
+            }, 2500);
+         } else if (this.state.contacts.find((item) => item.name.toLowerCase() === name.toLowerCase())) {
+            this.setState({ noticationContactExist: true });
+            setTimeout(() => {
+            this.setState({ noticationContactExist: false });
+            }, 2500);
         } else {
             this.setState(prevState => {
                 return {
@@ -73,10 +84,11 @@ export default class App extends Component {
     }
 
     render() {
-        const { contacts, filter } = this.state;
+        const { contacts, filter, noticationContactExist, noticationEnterData } = this.state;
         const visibleContacts = this.getVisibleContacts();
         return ( 
             <Layout>
+  
                 <CSSTransition
                     in={true}
                     appear={true}
@@ -86,20 +98,47 @@ export default class App extends Component {
                 >
                     <h1 className="Title">Phonebook</h1>
                 </CSSTransition>
-                
+    
+                <CSSTransition
+                    in={noticationContactExist}
+                    timeout={250}
+                    classNames="Notification-fade"
+                    unmountOnExit>
+                       <Notification
+                        message={'Contact already exists!'} />
+                </CSSTransition>
+
+                 <CSSTransition
+                    in={noticationEnterData}
+                    timeout={250}
+                    classNames="Notification-fade"
+                    unmountOnExit>
+                       <Notification
+                        message={'Enter data, please!'} />
+                </CSSTransition>
+
                 <ContactForm onAddContact={this.addContact} /> 
-                {contacts.length > 0 && (
-             <>       
-                {contacts.length > 1 && (
-                    <Filter
+                
+                <CSSTransition
+                    in={contacts.length > 0}
+                    timeout={0}
+                    ommountOnExit>
+                    <>   
+                    <CSSTransition
+                        in={contacts.length > 1}
+                        timeout={250}
+                        classNames="Filter-fade"
+                        unmountOnExit>
+                       <Filter
                         value={filter}
                         onChangeFilter={this.changeFilter} />
-                )}
+                    </CSSTransition>
+
                     <ContactList
                         contacts={visibleContacts}
                         onRemoveContact={this.removeContact} />
-              </>
-                )} 
+                    </>
+                </CSSTransition>
             </Layout>
         );
     }

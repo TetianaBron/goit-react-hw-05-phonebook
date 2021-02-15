@@ -14,8 +14,7 @@ const ContactList = ({ contacts, onRemoveContact }) => {
                         key={id}
                         timeout={250}
                         classNames="ContactItem-fade">
-                        <li className="ContactItem"
-                        >
+                        <li className="ContactItem">
                         {i + 1}. {name}: {number}
                         <IconButton
                             onClick={() => onRemoveContact(id)}

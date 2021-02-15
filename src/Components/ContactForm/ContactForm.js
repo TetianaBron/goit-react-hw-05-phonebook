@@ -25,15 +25,11 @@ export default class ContactForm extends Component {
         const { name, number } = this.state;
         e.preventDefault();
 
-        if (name === '' || number === '') {
-            alert('Enter the data.');
-        } else {
-            this.props.onAddContact(name, number);
-            this.setState({
-                name: '',
-                number: ''
+        this.props.onAddContact(name, number);
+        this.setState({
+            name: '',
+            number: ''
             });
-        }
     }; 
     
     render() {

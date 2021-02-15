@@ -1,6 +1,7 @@
 import './Filter.scss';
 import PropTypes from 'prop-types';
 
+
 const Filter = ({value, onChangeFilter}) => (
     <div className="FindForm">
         <label htmlFor="find"
