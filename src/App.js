@@ -102,13 +102,11 @@ export default class App extends Component {
                     value={filter}
                     onChangeFilter={this.changeFilter}
                     contacts={contacts}/>
-                   
 
                 <CSSTransition
                     in={contacts.length > 0}
                     timeout={0}
-                    ommountOnExit>
-                    
+                    ommountOnExit>     
                 <ContactList
                     contacts={visibleContacts}
                     onRemoveContact={this.removeContact} /> 
