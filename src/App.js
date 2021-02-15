@@ -6,20 +6,14 @@ import Filter from './Components/Filter/Filter';
 import ContactList from './Components/ContactList/ContactList';
 import { CSSTransition } from 'react-transition-group';
 import Notification from './Components/Notification/Notification';
-
+import Logo from './Components/Logo/Logo';
 
 
 export default class App extends Component {
-
-    static propTypes = {};
-
-    static defaultProps = {};
-
     state = {
         contacts: [],
         filter: '',
-        noticationContactExist: false,
-        noticationEnterData: false
+        message: null
     };
 
     addContact = (name, number) => {
@@ -29,23 +23,30 @@ export default class App extends Component {
        number
        };
 
-        if (name === '' || number === '') {
-              this.setState({ noticationEnterData: true });
+        if (name === '') {
+            this.setState({ message: 'Enter contact name, please!' });
             setTimeout(() => {
-            this.setState({ noticationEnterData: false });
+            this.setState({ message: null });
             }, 2500);
-         } else if (this.state.contacts.find((item) => item.name.toLowerCase() === name.toLowerCase())) {
-            this.setState({ noticationContactExist: true });
+            return;
+        }
+        if (number === '') {
+            this.setState({ message: 'Enter concact phone, please!' });
             setTimeout(() => {
-            this.setState({ noticationContactExist: false });
+            this.setState({ message: null });
             }, 2500);
-        } else {
-            this.setState(prevState => {
-                return {
-                    contacts: [...prevState.contacts, contact],
-                };
-            });
-        };
+            return;
+        }
+        if (this.state.contacts.find((item) => item.name.toLowerCase() === name.toLowerCase())) {
+            this.setState({ message: 'Contact already exists!' });
+            setTimeout(() => {
+            this.setState({ message: null });
+            }, 2500);
+            return;
+        } 
+        this.setState(prevState => {
+        return {contacts: [...prevState.contacts, contact],};
+        });
     };
     
     removeContact = contactId => {
@@ -84,60 +85,33 @@ export default class App extends Component {
     }
 
     render() {
-        const { contacts, filter, noticationContactExist, noticationEnterData } = this.state;
+        const { contacts, filter, message } = this.state;
         const visibleContacts = this.getVisibleContacts();
         return ( 
             <Layout>
-  
-                <CSSTransition
-                    in={true}
-                    appear={true}
-                    timeout={500}
-                    classNames="Title-SlideIn"
-                    unmountOnExit
-                >
-                    <h1 className="Title">Phonebook</h1>
-                </CSSTransition>
-    
-                <CSSTransition
-                    in={noticationContactExist}
-                    timeout={250}
-                    classNames="Notification-fade"
-                    unmountOnExit>
-                       <Notification
-                        message={'Contact already exists!'} />
-                </CSSTransition>
 
-                 <CSSTransition
-                    in={noticationEnterData}
-                    timeout={250}
-                    classNames="Notification-fade"
-                    unmountOnExit>
-                       <Notification
-                        message={'Enter data, please!'} />
-                </CSSTransition>
-
-                <ContactForm onAddContact={this.addContact} /> 
+              <Logo />  
                 
+                <Notification
+                    message={message} />
+
+                <ContactForm
+                    onAddContact={this.addContact} /> 
+                    
+                <Filter
+                    value={filter}
+                    onChangeFilter={this.changeFilter}
+                    contacts={contacts}/>
+                   
+
                 <CSSTransition
                     in={contacts.length > 0}
                     timeout={0}
                     ommountOnExit>
-                    <>   
-                    <CSSTransition
-                        in={contacts.length > 1}
-                        timeout={250}
-                        classNames="Filter-fade"
-                        unmountOnExit>
-                       <Filter
-                        value={filter}
-                        onChangeFilter={this.changeFilter} />
-                    </CSSTransition>
-
-                    <ContactList
-                        contacts={visibleContacts}
-                        onRemoveContact={this.removeContact} />
-                    </>
+                    
+                <ContactList
+                    contacts={visibleContacts}
+                    onRemoveContact={this.removeContact} /> 
                 </CSSTransition>
             </Layout>
         );
