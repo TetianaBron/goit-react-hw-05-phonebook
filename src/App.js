@@ -16,6 +16,13 @@ export default class App extends Component {
         message: null
     };
 
+    setMassge = (note) => {
+      this.setState({ message:  note});
+      setTimeout(() => {
+      this.setState({ message: null });
+      }, 2500);
+    }
+
     addContact = (name, number) => {
        const contact = {
        id: uuidv4(),
@@ -24,24 +31,15 @@ export default class App extends Component {
        };
 
         if (name === '') {
-            this.setState({ message: 'Enter contact name, please!' });
-            setTimeout(() => {
-            this.setState({ message: null });
-            }, 2500);
+            this.setMassge('Enter concact name, please!');
             return;
         }
         if (number === '') {
-            this.setState({ message: 'Enter concact phone, please!' });
-            setTimeout(() => {
-            this.setState({ message: null });
-            }, 2500);
+            this.setMassge('Enter concact phone, please!');
             return;
         }
         if (this.state.contacts.find((item) => item.name.toLowerCase() === name.toLowerCase())) {
-            this.setState({ message: 'Contact already exists!' });
-            setTimeout(() => {
-            this.setState({ message: null });
-            }, 2500);
+            this.setMassge('Contact already exists!');
             return;
         } 
         this.setState(prevState => {
