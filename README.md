@@ -1,2 +1,2 @@
-# goit-react-hw-03-phonebook
-Phonebook with localStorage
+# goit-react-hw-05-phonebook
+Phonebook with animation
